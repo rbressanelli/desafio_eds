@@ -2,42 +2,58 @@ from fastapi import APIRouter, status, Depends, HTTPException
 from typing import List, Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
+from sqlalchemy import select, func
+from fastapi import Query
 from models.user import UserModel
 from schemas.user_schema import UserSchema
 from core.database import get_db
+
+from schemas.page_schema import Page
 
 
 api_router = APIRouter()
 
 
-@api_router.get("/", status_code=status.HTTP_200_OK, response_model=List[UserSchema])
+@api_router.get(
+    "/",
+    status_code=status.HTTP_200_OK,
+    response_model=Page[UserSchema],
+)
 async def get_users(
     name: Optional[str] = None,
     email: Optional[str] = None,
-    skip: int = 0,
-    limit: int = 10,
+    page: int = Query(1, ge=1),
+    size: int = Query(10, ge=1, le=100),
     db: AsyncSession = Depends(get_db),
 ):
     query = select(UserModel)
 
-    # Filtro por name (case insensitive)
     if name:
         query = query.where(UserModel.name.ilike(f"%{name}%"))
 
-    # Filtro por email (case insensitive)
     if email:
         query = query.where(UserModel.email.ilike(f"%{email}%"))
 
-    # Paginação
-    query = query.offset(skip).limit(limit)
+    # 🔹 TOTAL
+    total_query = select(func.count()).select_from(query.subquery())
+    total_result = await db.execute(total_query)
+    total = total_result.scalar_one()
+
+    # 🔹 PAGINAÇÃO
+    offset = (page - 1) * size
+    query = query.offset(offset).limit(size)
 
     result = await db.execute(query)
     users = result.scalars().all()
 
-    if not users:
-        raise HTTPException(
-            status_code=status.HTTP_404_NOT_FOUND,
-            detail="Usuários não encontrados",
-        )
+    total_pages = (total + size - 1) // size
 
-    return users
+    return {
+        "items": users,
+        "total": total,
+        "page": page,
+        "size": size,
+        "total_pages": total_pages,
+        "has_next": page < total_pages,
+        "has_previous": page > 1,
+    }
