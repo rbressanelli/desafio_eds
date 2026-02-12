@@ -5,7 +5,7 @@
 <h2>Contents</h2>
 
 - [1. About 💻](#1-about-)
-- [2. API Documentation 🔗](#2-api-documentation-)
+- [2. API Documentation 💾](#2-api-documentation-)
 - [3. Technologies 🧰](#3-technologies-)
 - [4. Requirements ☑️](#4-requirements-️)
 - [5. Running the Application ▶️](#5-running-the-application-️)
@@ -17,14 +17,14 @@
 	- [6 – Executar migrações](#6--executar-migrações)
 	- [7 – Iniciar a API](#7--iniciar-a-api)
 	- [8 - URL base de acesso à API](#8---url-base-de-acesso-à-api)
-- [6 - Endpoints](#6---endpoints)
+- [6 - Endpoints 🔗](#6---endpoints-)
 	- [LISTAR TODOS OS USUÁRIOS](#listar-todos-os-usuários)
 	- [LISTAR UM USUÁRIO PELO ID](#listar-um-usuário-pelo-id)
 	- [CRIAR UM NOVO USUÁRIO](#criar-um-novo-usuário)
 	- [MODIFICAR UM USUÁRIO JÁ CADASTRADO](#modificar-um-usuário-já-cadastrado)
 	- [DELETAR UM USUÁRIO EXISTENTE](#deletar-um-usuário-existente)
-- [7 - FILTROS](#7---filtros)
-- [8 - PAGINAÇÃO](#8---paginação)
+- [7 - FILTROS 📄](#7---filtros-)
+- [8 - PAGINAÇÃO 📙](#8---paginação-)
 
 ---
 
@@ -50,7 +50,7 @@ O banco de dados utilizado é **PostgreSQL**, executado em um **contêiner Docke
 
 <a name="documentation"></a>
 
-## 2. API Documentation 🔗
+## 2. API Documentation 💾
 
 A documentação interativa (Swagger) pode ser acessada em:
 
@@ -135,7 +135,7 @@ uvicorn main:app
 http://127.0.0.1:8000/api/v1
 ```
 
-## 6 - Endpoints
+## 6 - Endpoints 🔗
 
 ### LISTAR TODOS OS USUÁRIOS
 
@@ -180,7 +180,7 @@ http://127.0.0.1:8000/api/v1
 	
 
 
-## 7 - FILTROS
+## 7 - FILTROS 📄
 
 	Pode-se filtrar o resultado da listagem de todos os usuários por nome e/ou por email.
 
@@ -191,7 +191,7 @@ http://127.0.0.1:8000/api/v1
 	O resultado, caso sejam encontrados usuários onde os dados atendam aos critérios de busca, será uma listagem de objetos usuário.
 	Caso nenhum dados seja encontrado no banco de dados nada será retornado.
 
-## 8 - PAGINAÇÃO
+## 8 - PAGINAÇÃO 📙 
 
 	A paginação é feita de forma semelhante ao filtro, conforme indicado abaixo:
 
