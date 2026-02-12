@@ -140,211 +140,44 @@ http://127.0.0.1:8000/api/v1
 ### LISTAR TODOS OS USUÁRIOS
 
     Método GET
-    baseURL/users
 
-    Resposta esperada: 200 - OK
-	{
-	"items": [
-		{
-			"name": "Name142",
-			"surname": "Surname142",
-			"email": "user142@example.com",
-			"age": 38,
-			"id": 142
-		},
-		{
-			"name": "Name143",
-			"surname": "Surname143",
-			"email": "user143@example.com",
-			"age": 56,
-			"id": 143
-		},
-		...parte do conteúdo foi suprimido
-				},
-		{
-			"name": "Roberto",
-			"surname": "Bressanelli",
-			"email": "email@emai.com",
-			"age": 56,
-			"id": 151
-		}
-	],
-	"total": 150,
-	"page": 1,
-	"size": 10,
-	"total_pages": 15,
-	"has_next": true,
-	"has_previous": false
-	}
-   
+    ENDPOINT: baseURL/users
 
-    Resposta esperada se não existirem dados no banco: 200 - OK
-    [] - lista vazia
+    
 
 
 ### LISTAR UM USUÁRIO PELO ID
 
     Método GET
-    baseURL/users/{user_id}
 
-    Resposta esperada: 200 - OK
+    ENDPOINT: baseURL/users/{user_id}
 
-	[
-		{
-		"name": "Roberto",
-		"surname": "Bressanelli",
-		"email": "email@email.com",
-		"age": 34,
-		"id": 1
-		}
-	]
-    
-    Resposta no caso  de usuário inexistente:
-	404 – Not Found
    
-	{
-	  "detail": "Usuário não encontrado"
-	}
-
 
 ### CRIAR UM NOVO USUÁRIO
 
     Método POST
-    baseURL/users
 
-	Exemplo de corpo de requisição:
+    ENDPOINT: baseURL/users
 
-	{
-		"name": "Roberto",
-		"surname": "Bressanelli",
-		"email": "email@email.com",
-		"age": 34
-	}  
-
-	Resposta esperada em caso de sucesso: 201 – Created
-
-	{
-		"name": "Roberto",
-		"surname": "Bressanelli",
-		"email": "email@email.com",
-		"age": 34,
-		"id": 2
-	} 
-
-	Resposta caso já exista o mesmo e-mail cadastrado: 409 – Conflict
-
-	{
-		"detail": "Email já cadastrado"
-	}
-
-	Resposta esperada caso insira um valor inválido para idade (texto ou float)
-	422 – Unprocessable Content
-
-	{
-	"detail": [
-		{
-			"type": "int_from_float",
-			"loc": [
-				"body",
-				"age"
-				],
-				"msg": "Input should be a valid integer, got a number with a fractional part",
-				"input": 22.5
-			}
-		]
-	}
-
-
-	Respostas no caso de umail inválido: 422 – Unprocessable Content
-
-	{
-	"detail": [
-		{
-			"type": "value_error",
-			"loc": [
-				"body",
-				"email"
-				],
-				"msg": "value is not a valid email address: The part after the @-sign is not valid. It should have a period.",
-				"input": "email@emai",
-				"ctx": {
-				"reason": "The part after the @-sign is not valid. It should have a period."
-				}
-			}
-		]
-	}
-
-
-	{
-	"detail": [
-		{
-			"type": "value_error",
-			"loc": [
-				"body",
-				"email"
-				],
-				"msg": "value is not a valid email address: An email address must have an @-sign.",
-				"input": "emailemail.com",
-				"ctx": {
-				"reason": "An email address must have an @-sign."
-				}
-			}
-		]
-	}
+	
 
 
 ### MODIFICAR UM USUÁRIO JÁ CADASTRADO
 
 	Método PATCH
-	baseURL/users/{user_id}
 
-	OBS: Pode ser modificado um ou vários atributos na mesma request.
+	ENDPOINT: baseURL/users/{user_id}
 
-
-	Exemplo de corpo de requisição:
-	{
-		“age”: 45
-	}
-
-	Resposta esperada no caso de sucesso: 202 – Accepted
-
-	{
-		"name": "Roberto",
-		"surname": "Bressanelli",
-		"email": "email@email.com",
-		"age": 45,
-		"id": 2
-	}
-
-	Resposta no caso  de usuário inexistente: 404 – Not Found
-
-	{
-		"detail": "Usuário não encontrado"
-	}
-
-	Resposta caso já exista o mesmo e-mail cadastrado: 409 – Conflict
-
-	{
-		"detail": "Email já cadastrado"
-	}	
-
-	Respostas possíveis para e-mails inválidos:	422 – Unprocessable Content
-
-	Ver respostas no campo de criar usuário.
+	
 
 ### DELETAR UM USUÁRIO EXISTENTE
 
 	Método DELETE
-	baseURL/users/{user_id}
 
-	Resposta esperada em caso de sucesso: 204 – No Content
-	Sem corpo de retorno.
+	ENDPOINT: baseURL/users/{user_id}
 
-	Resposta no caso  de usuário inexistente: 404 – Not Found
-
-	{
-		"detail": "Usuário não encontrado"
-	}
+	
 
 
 ## 7 - FILTROS
