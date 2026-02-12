@@ -25,6 +25,7 @@
 	- [DELETAR UM USUÁRIO EXISTENTE](#deletar-um-usuário-existente)
 - [7 - FILTROS 📄](#7---filtros-)
 - [8 - PAGINAÇÃO 📙](#8---paginação-)
+- [9 - TERMOS DE USO 📜](#9---termos-de-uso-)
 
 ---
 
@@ -205,4 +206,12 @@ http://127.0.0.1:8000/api/v1
 	"total_pages": 15    - número total de páginas
 	"has_next": true     - se existe uma nova página
 	"has_previous": true - se existe uma página anterior
+
+## 9 - TERMOS DE USO 📜
+
+Este é um projeto open source para uso educacional e não comercial.
+
+
+**Tipo de licença**:  <a name="gpl" href="https://www.gnu.org/licenses/gpl-3.0.en.html" target="_blank">GPL</a>
+
 
