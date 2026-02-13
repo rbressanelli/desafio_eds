@@ -1,5 +1,5 @@
-from pydantic import BaseModel, EmailStr
-from typing import Optional
+from pydantic import BaseModel, EmailStr, ConfigDict
+from typing import Optional, List
 
 
 class UserCreateSchema(BaseModel):
@@ -19,5 +19,9 @@ class UserUpdateSchema(BaseModel):
 class UserSchema(UserCreateSchema):
     id: int
     
-    class Config:
-        from_atributes = True
+    model_config = ConfigDict(from_attributes=True)
+
+
+class UserListSchema(BaseModel):
+    items: List[UserSchema]
+    
