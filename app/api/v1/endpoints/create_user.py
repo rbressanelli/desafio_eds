@@ -1,9 +1,9 @@
 from fastapi import APIRouter, status, Depends, HTTPException
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.exc import IntegrityError
-from models.user import UserModel
-from schemas.user_schema import UserSchema, UserCreateSchema
-from core.database import get_db
+from ....models.user import UserModel
+from ....schemas.user_schema import UserSchema, UserCreateSchema
+from ....core.database import get_db
 
 
 api_router = APIRouter()

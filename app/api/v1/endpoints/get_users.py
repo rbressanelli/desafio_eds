@@ -4,11 +4,11 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
 from sqlalchemy import select, func
 from fastapi import Query
-from models.user import UserModel
-from schemas.user_schema import UserSchema
-from core.database import get_db
+from ....models.user import UserModel
+from ....schemas.user_schema import UserSchema
+from ....core.database import get_db
 
-from schemas.page_schema import Page
+from ....schemas.page_schema import Page
 
 
 api_router = APIRouter()
@@ -34,12 +34,10 @@ async def get_users(
     if email:
         query = query.where(UserModel.email.ilike(f"%{email}%"))
 
-    # 🔹 TOTAL
     total_query = select(func.count()).select_from(query.subquery())
     total_result = await db.execute(total_query)
     total = total_result.scalar_one()
 
-    # 🔹 PAGINAÇÃO
     offset = (page - 1) * size
     query = query.offset(offset).limit(size)
 

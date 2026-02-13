@@ -1,4 +1,4 @@
-from models import user
+from app.models import user
 
 from logging.config import fileConfig
 
