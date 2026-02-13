@@ -29,10 +29,10 @@ async def get_users(
     query = select(UserModel)
 
     if name:
-        query = query.where(UserModel.name.ilike(f"%{name}%"))
+        query = query.where(func.lower(UserModel.name).like(f"{name.lower()}%"))
 
     if email:
-        query = query.where(UserModel.email.ilike(f"%{email}%"))
+        query = query.where(func.lower(UserModel.email).like(f"{email.lower()}%"))
 
     total_query = select(func.count()).select_from(query.subquery())
     total_result = await db.execute(total_query)
