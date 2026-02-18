@@ -183,13 +183,15 @@ http://127.0.0.1:8000/api/v1
 
 ## 7 - FILTROS 📄
 
-	Pode-se filtrar o resultado da listagem de todos os usuários por nome ou por email. Não é necessário informar o nome completo e pode-se usar tudo em minúsculas.
+	Pode-se filtrar o resultado da listagem de todos os usuários por nome ou por email. Não é necessário 
+	informar o nome completo e pode-se usar tudo em minúsculas.
 
 	Deve-se montar o endpoint como informado abaixo:
 
 	baseURL/users?name=NOMEBUSCADO&email=EMAILBUSCADO
 
-	O resultado, caso sejam encontrados usuários onde os dados atendam aos critérios de busca, será uma listagem de objetos usuário.
+	O resultado, caso sejam encontrados usuários onde os dados atendam aos critérios de busca, será uma 
+	listagem de objetos usuário.
 	Caso nenhum dados seja encontrado no banco de dados nada será retornado.
 
 ## 8 - PAGINAÇÃO 📙 
