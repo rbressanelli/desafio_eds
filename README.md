@@ -144,7 +144,7 @@ http://127.0.0.1:8000/api/v1
 
     ENDPOINT: baseURL/users
 
-    
+    Listagem ordenada do mais recente para o mais antigo objeto.
 
 
 ### LISTAR UM USUÁRIO PELO ID
@@ -183,7 +183,7 @@ http://127.0.0.1:8000/api/v1
 
 ## 7 - FILTROS 📄
 
-	Pode-se filtrar o resultado da listagem de todos os usuários por nome e/ou por email.
+	Pode-se filtrar o resultado da listagem de todos os usuários por nome ou por email. Não é necessário informar o nome completo e pode-se usar tudo em minúsculas.
 
 	Deve-se montar o endpoint como informado abaixo:
 
