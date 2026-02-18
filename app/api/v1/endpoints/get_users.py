@@ -1,8 +1,8 @@
-from fastapi import APIRouter, status, Depends, HTTPException
-from typing import List, Optional
+from fastapi import APIRouter, status, Depends
+from typing import Optional
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from sqlalchemy import select, func
+from sqlalchemy import select, func, and_, or_
 from fastapi import Query
 from ....models.user import UserModel
 from ....schemas.user_schema import UserSchema
@@ -26,13 +26,24 @@ async def get_users(
     size: int = Query(10, ge=1, le=100),
     db: AsyncSession = Depends(get_db),
 ):
-    query = select(UserModel)
 
-    if name:
-        query = query.where(func.lower(UserModel.name).like(f"{name.lower()}%"))
+    query = select(UserModel).order_by(-UserModel.id)
+    if name or email:
+         # filtro 'or'
+        query = query.where(
+                or_(
+                    UserModel.name.ilike(f"{name}%"),
+                    and_(UserModel.email.ilike(f"{email}%"))
+                )
+            ) 
+      
+    # abaixo filtro 'and' mantido no código por conveniência.
+    
+    # if name:
+    #     query = query.where(func.lower(UserModel.name).like(f"{name.lower()}%"))
 
-    if email:
-        query = query.where(func.lower(UserModel.email).like(f"{email.lower()}%"))
+    # if email:
+    #     query = query.where(func.lower(UserModel.email).like(f"{email.lower()}%"))
 
     total_query = select(func.count()).select_from(query.subquery())
     total_result = await db.execute(total_query)
